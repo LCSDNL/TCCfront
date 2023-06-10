@@ -21,6 +21,27 @@ function App() {
       });
   }
 
+  function GeraAudio() {
+    const audioData = {
+      texto: respostatxt
+    };
+
+    axios
+      .post('http://localhost:3030/restotext', audioData, {
+        responseType: 'arraybuffer'
+      })
+      .then((res) => {
+        const audioBlob = new Blob([res.data], { type: 'audio/wav' });
+        const audioUrl = URL.createObjectURL(audioBlob);
+        const audioElement = new Audio(audioUrl);
+        audioElement.play();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  
+
   return (
     <>
       <h1 className="text-3xl font-bold underline">Faça sua pergunta.</h1>
@@ -41,6 +62,8 @@ function App() {
       <h1 className="text-3xl font-bold underline">
         {respostatxt.length === 0 ? 'Aguardando Pergunta' : respostatxt}
       </h1>
+
+      <button id='geraAudio' onClick={GeraAudio}>Gerar audio</button>
     </>
   );
 }
