@@ -5,6 +5,7 @@ import axios from 'axios';
 function App() {
   const [perguntatxt, setPerguntatxt] = useState('');
   const [respostatxt, setRespostatxt] = useState('');
+  const [voiceSound, setVoiceSound] =useState<HTMLAudioElement>();
 
   function AskService() {
     const requestData = {
@@ -34,13 +35,20 @@ function App() {
         const audioBlob = new Blob([res.data], { type: 'audio/wav' });
         const audioUrl = URL.createObjectURL(audioBlob);
         const audioElement = new Audio(audioUrl);
-        audioElement.play();
+        setVoiceSound(audioElement);
+        voiceResume();
       })
       .catch((err) => {
         console.log(err);
       });
   }
-  
+
+  function voicePause(){
+    voiceSound?.pause();
+  }
+  function voiceResume(){
+    voiceSound?.play();
+  }
 
   return (
     <>
@@ -64,6 +72,9 @@ function App() {
       </h1>
 
       <button id='geraAudio' onClick={GeraAudio}>Gerar audio</button>
+      <button onClick={()=>{voicePause()}}>Pause</button>
+
+      <button onClick={()=>{voiceResume()}}>resume</button>
     </>
   );
 }
