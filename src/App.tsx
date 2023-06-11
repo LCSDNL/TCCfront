@@ -11,6 +11,7 @@ function App() {
   const [audioGerado, setAudioGerado]= useState(false);
   const [voiceSpeed, setVoiceSpeed]=useState('');
   const [voiceDegree, setVoiceDegree]=useState('');
+  const [voiceAutor, setVoiceAutor]= useState('');
 
   function AskService() {
     const requestData = {
@@ -26,10 +27,11 @@ function App() {
         console.log(err);
       });
   }
-
-    function GeraAudio() {
+  
+  function GeraAudio() {
     const audioData = {
       texto: respostatxt,
+      vozAutor: voiceAutor,
       vozVelocidade: voiceSpeed,
       vozTom: voiceDegree,
     };
@@ -54,10 +56,13 @@ function App() {
     voiceSound?.pause();
     setIsPlaying(false)
   }
+
   function voiceResume(){
     setIsPlaying(true);
     voiceSound?.play();
   }
+
+
 
   return (
     <>
@@ -91,10 +96,22 @@ function App() {
         <div className='flex'>
             
             <div>
-            <select onChange={(e)=>{setAudioGerado(false)}}>
-              <option value={1}>1</option>
-              <option value={2}>2</option>
-              <option value={3}>3</option>
+            <select onChange={(e)=>{setAudioGerado(false); setVoiceAutor(e.target.value)}}>
+              <option value={`pt-BR-AntonioNeural`}>Antonio</option>
+              <option value={`pt-BR-BrendaNeural`}>Brenda</option>
+              <option value={`pt-BR-DonatoNeural`}>Donato</option>
+              <option value={`pt-BR-ElzaNeural`}>Elza</option>
+              <option value={`pt-BR-FabioNeural`}>Fabio</option>
+              <option value={`pt-BR-FranciscaNeural`}>Francisca</option>
+              <option value={`pt-BR-GiovannaNeural`}>Giovanna</option>
+              <option value={`pt-BR-HumbertoNeural`}>Humberto</option>
+              <option value={`pt-BR-JulioNeural`}>Julio</option>
+              <option value={`pt-BR-LeilaNeura`}>Leila</option>
+              <option value={`pt-BR-LeticiaNeural`}>Leticia</option>
+              <option value={`pt-BR-ManuelaNeural`}>Manuela</option>
+              <option value={`pt-BR-NicolauNeural`}>Nicolau</option>
+              <option value={`pt-BR-ValerioNeural`}>Valerio</option>
+              <option value={`pt-BR-YaraNeural`}>Yara</option>
             </select>
             </div>
 
