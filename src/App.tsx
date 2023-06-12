@@ -9,9 +9,11 @@ function App() {
   const [voiceSound, setVoiceSound] =useState<HTMLAudioElement>();
   const [isPlaying, setIsPlaying] =useState(false);
   const [audioGerado, setAudioGerado]= useState(false);
-  const [voiceSpeed, setVoiceSpeed]=useState('');
-  const [voiceDegree, setVoiceDegree]=useState('');
-  const [voiceAutor, setVoiceAutor]= useState('');
+  const [voiceSpeed, setVoiceSpeed]=useState('0');
+  const [voiceDegree, setVoiceDegree]=useState('0');
+  const [voiceAutor, setVoiceAutor]= useState('pt-BR-AntonioNeural');
+
+  const [count, setCount]= useState(0);
 
   function AskService() {
     const requestData = {
@@ -22,6 +24,8 @@ function App() {
       .post('http://localhost:3030/resposta', requestData)
       .then((res) => {
         setRespostatxt(res.data);
+        setAudioGerado(false)
+        
       })
       .catch((err) => {
         console.log(err);
@@ -46,6 +50,7 @@ function App() {
         const audioElement = new Audio(audioUrl);
         setVoiceSound(audioElement);
         setAudioGerado(true);
+        setCount(count+1);
       })
       .catch((err) => {
         console.log(err);
@@ -106,7 +111,7 @@ function App() {
               <option value={`pt-BR-GiovannaNeural`}>Giovanna</option>
               <option value={`pt-BR-HumbertoNeural`}>Humberto</option>
               <option value={`pt-BR-JulioNeural`}>Julio</option>
-              <option value={`pt-BR-LeilaNeura`}>Leila</option>
+              <option value={`pt-BR-LeilaNeural`}>Leila</option>
               <option value={`pt-BR-LeticiaNeural`}>Leticia</option>
               <option value={`pt-BR-ManuelaNeural`}>Manuela</option>
               <option value={`pt-BR-NicolauNeural`}>Nicolau</option>
@@ -118,12 +123,12 @@ function App() {
 
             <div className='grid justify-items-center px-3 mx-10'>
             <label>Velocidade da voz: {voiceSpeed}</label>
-            <input type="range" min="1" max="100" onChange={(e)=>{setVoiceSpeed(e.target.value);setAudioGerado(false)}} ></input>
+            <input type="range" min="-100" max="100" value={voiceSpeed} onChange={(e)=>{setVoiceSpeed(e.target.value);setAudioGerado(false)}} ></input>
             </div>
 
             <div className='grid justify-items-center px-3 mx-10'>
             <label>Tom da voz: {voiceDegree}</label>
-            <input type="range" min="1" max="100" onChange={(e)=>{setVoiceDegree(e.target.value);setAudioGerado(false)}} ></input>
+            <input type="range" min="-100" max="100" value={voiceDegree} onChange={(e)=>{setVoiceDegree(e.target.value);setAudioGerado(false)}} ></input>
             </div>
             
 
@@ -148,6 +153,7 @@ function App() {
       </div>
 </div>
 </div>
+        
     </>
   );
 }
