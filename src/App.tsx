@@ -2,6 +2,8 @@ import { useState } from 'react';
 import './App.css';
 import axios from 'axios';
 import { Megaphone, Pause, Play } from '@phosphor-icons/react';
+import Popup from 'reactjs-popup';
+
 
 function App() {
   const [perguntatxt, setPerguntatxt] = useState('');
@@ -13,7 +15,15 @@ function App() {
   const [voiceDegree, setVoiceDegree]=useState('0');
   const [voiceAutor, setVoiceAutor]= useState('pt-BR-AntonioNeural');
 
-  const [count, setCount]= useState(0);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const openPopup = () => {
+    setIsPopupOpen(true);
+  };
+
+  const closePopup = () => {
+    setIsPopupOpen(false);
+  };
 
   function AskService() {
     const requestData = {
@@ -50,7 +60,7 @@ function App() {
         const audioElement = new Audio(audioUrl);
         setVoiceSound(audioElement);
         setAudioGerado(true);
-        setCount(count+1);
+       // setCount(count+1);
       })
       .catch((err) => {
         console.log(err);
@@ -153,6 +163,10 @@ function App() {
       </div>
 </div>
 </div>
+      
+    <div className="app">
+      <Popup children={undefined} />
+    </div>
         
     </>
   );
