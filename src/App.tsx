@@ -96,7 +96,8 @@ function App() {
             </button>
           </div>
         </div>
-
+        {count<4 
+        ?
         <div className="bg-slate-200 h-fit m-1 p-5 w-10/12 rounded-md border-0 ">
           <div className=" grid justify-items-center">
             <div className="flex">
@@ -190,6 +191,12 @@ function App() {
             </span>
           </div>
         </div>
+        :
+        <div className="bg-slate-200 h-fit m-1 p-5 w-10/12 rounded-md border-0 ">
+          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdl4dqlNQS7uZnYImwom68NV1UBcRvvkigwpEU3mSsUCMSNGQ/viewform?embedded=true" width="100%" height="669">A carregar…</iframe>
+          <button onClick={()=>{setCount(-1000)}}>Já Respondi ao questionário!</button>
+        </div>
+        }
       </div>
     </>
   );
