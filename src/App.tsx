@@ -29,7 +29,7 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-        setRespostatxt("Ocorreu um problema...")
+        setRespostatxt("Ocorreu um problema. Tente novamente...")
       });
   }
 
@@ -75,12 +75,10 @@ function App() {
         className=" min-h-screen bg-gradient-to-r from-cyan-300 to-blue-700 grid justify-items-center"
       >
         <div className="mt-10">
-          <h1 className="text-5xl font-bold underline">WAFLOW</h1>
+          <h1 className="text-5xl font-bold underline text-slate-100">WAFLOW</h1>
         </div>
-        <div className="w-10/12 text-center">
-          <div className="mb-5 mt-10">
-            <h5 className="text-2xl font-bold">Faça sua pergunta.</h5>
-          </div>
+        <div className="w-10/12 text-center text-slate-100">
+          
           <div className="mt-2">
           <div className="bg-slate-200 h-fit m-1 p-5 rounded-md border-0 ">
           <div className=" grid justify-items-center grid-cols-1">
@@ -170,7 +168,7 @@ function App() {
                   onClick={GeraAudio}
                   className="bg-blue-600 m-1 disabled:opacity-30 rounded-md p-2"
                 >
-                  <Megaphone size={32} weight="bold" alt="Gerar audio" />
+                  <Megaphone size={32} weight="bold" color="#fcfcfc" alt="Gerar audio" />
                 </button>
 
                 {isPlaying ? (
@@ -180,7 +178,7 @@ function App() {
                     }}
                     className="bg-blue-600 m-1 rounded-md p-2"
                   >
-                    <Pause size={32} weight="bold"/>
+                    <Pause size={32} color="#fcfcfc" weight="bold"/>
                   </button>
                 ) : (
                   <button
@@ -189,7 +187,7 @@ function App() {
                     }}
                     className="bg-blue-600 m-1 rounded-md p-2"
                   >
-                    <Play size={32}  weight="bold"/>
+                    <Play size={32} color="#fcfcfc"  weight="bold"/>
                   </button>
                 )}
               </div>
@@ -197,15 +195,15 @@ function App() {
           </div>
 
           <div className=" bg-slate-300 rounded-md text-center w-19/10 mx-auto mt-7 pb-2">
-            <span className="text-2xl font-bold ">
-              {respostatxt.length === 0 ? "Aguardando Pergunta" : respostatxt}
+            <span className="text-1xl font-bold ">
+              {respostatxt.length === 0 ? "Aguardando Pergunta." : respostatxt}
             </span>
           </div>
         </div>
         :
         <div className="bg-slate-200 h-fit m-1 p-5 w-10/12 rounded-md border-0 ">
           <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdl4dqlNQS7uZnYImwom68NV1UBcRvvkigwpEU3mSsUCMSNGQ/viewform?embedded=true" width="100%" height="669">A carregar…</iframe>
-          <button onClick={()=>{setCount(-1000)}}>Já Respondi ao questionário!</button>
+          <button  className="bg-blue-600 m-1 rounded-md p-2 font-bold underline mt-5 text-slate-100" onClick={()=>{setCount(-1000)}}>Já Respondi ao questionário!</button>
         </div>
         }
       </div>
